@@ -1,0 +1,58 @@
+/* Copyright (c) 2024 Zenin Easa Panthakkalakath */
+
+html,
+body {
+    overflow: hidden;
+    height: 100%;
+}
+
+body {
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.direction {
+    background-color: #000;
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-right: 1em;
+}
+.direction .button {
+    color: #fff;
+    text-align: center;
+}
+.direction .active{
+    color: #00faff;
+}
+
+.action {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-left: 1em;
+}
+.action .button {
+    background-color: #000;
+    border-radius: 50%;
+    color: #fff;
+    padding: 1.5em;
+    margin: 0.5em
+}
+.action .active{
+    color: #00faff;
+}
