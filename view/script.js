@@ -23,6 +23,9 @@ function processKeyEvent(touchID, buttonID, startMoveOrEnd) {
 
 // Function to send joystick key press events to the backend
 function sendKeyEvent(buttonID, startOrEnd) {
+    if (buttonID === ' ') {
+        return;
+    }
     const data = {
         buttonID: buttonID,
         startOrEnd: startOrEnd

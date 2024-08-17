@@ -24,17 +24,24 @@ body {
 
 .direction {
     background-color: #000;
-    width: 10em;
-    height: 10em;
+    width: 14em;
+    height: 14em;
     border-radius: 50%;
     align-items: center;
     display: grid;
     grid-template-columns: auto auto auto;
-    margin-right: 1em;
+    margin-right: 5em;
+}
+.direction .buttonContainer {
+    color: #fff;
+    display: table;
+    height: 100%;
+    width: 100%;
+    text-align: center;
 }
 .direction .button {
-    color: #fff;
-    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
 }
 .direction .active{
     color: #00faff;
@@ -44,14 +51,14 @@ body {
     align-items: center;
     display: grid;
     grid-template-columns: auto auto auto;
-    margin-left: 1em;
+    margin-left: 5em;
 }
 .action .button {
     background-color: #000;
     border-radius: 50%;
     color: #fff;
     padding: 1.5em;
-    margin: 0.5em
+    margin: 0.5em;
 }
 .action .active{
     color: #00faff;
