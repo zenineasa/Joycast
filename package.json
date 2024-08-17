@@ -16,6 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
+    "open": "^10.1.0",
+    "qrcode": "^1.5.4",
     "robotjs": "^0.6.0"
   }
 }

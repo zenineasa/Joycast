@@ -3,6 +3,8 @@
 import os from 'os';
 import express from 'express';
 import robot from 'robotjs';
+import qrcode from 'qrcode';
+import open from 'open';
 
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -64,13 +66,20 @@ function getLocalIPAddress() {
 
 
 const app = express();
-const PORT = 3000;
+const PORT = 7171;
+const url = `http://${getLocalIPAddress()}:${PORT}`;
 
 app.use(express.json());
 app.use(express.static(__dirname + '/view'));
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/view/index.html');
+});
+
+app.get('/qr', (req, res) => {
+    qrcode.toDataURL(url, function (err, base64URL) {
+        res.send(`<html><body><img src="${base64URL}"></body></html>`);
+    })
 });
 
 app.post('/keyEvent', (req, res) => {
@@ -87,7 +96,8 @@ app.post('/keyEvent', (req, res) => {
 
 app.listen(PORT, (error) => {
     if(!error) {
-        console.log(`Server running at http://${getLocalIPAddress()}:${PORT}`);
+        console.log(`Joystick running at ${url}`);
+        open(url + '/qr');
     } else {
         console.log("Error: ", error);
     }
