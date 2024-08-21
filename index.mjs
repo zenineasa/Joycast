@@ -28,13 +28,20 @@ const buttonIDVsOrder = {
 let lastPlayerID = -1;
 const playerIPVsID = {};
 const availableKeys = [
-    //'-', '=', '[', ']', ';', '\'', ',', '.', '/', '\\', '`', ' '
+    'numpad_+', 'numpad_-', 'numpad_*', 'numpad_/', 'numpad_.',
+    // 'backspace', 'delete', 'enter', 'tab', 'escape',
+    'home', 'end', 'pageup', 'pagedown',
+    'up', 'down', 'right', 'left',
 ];
 for(let i = 'a'.charCodeAt(0); i < 'a'.charCodeAt(0)+26; ++i) {
     availableKeys.push(String.fromCharCode(i));
 }
 for (let i = 0; i < 9; ++i) {
     availableKeys.push(i.toString());
+    availableKeys.push(`numpad_${i}`);
+}
+for(let i = 1; i < 25; ++i) {
+    availableKeys.push(`f${i}`);
 }
 
 function getPlayerID(playerIP) {
@@ -96,7 +103,9 @@ app.post('/keyEvent', (req, res) => {
 
 app.listen(PORT, (error) => {
     if(!error) {
+        const maxPlayers = Math.floor(availableKeys.length/numButtonsPerPlayer);
         console.log(`Joystick running at ${url}`);
+        console.log(`We should be able to support ${maxPlayers} number of players in total`)
         open(url + '/qr');
     } else {
         console.log("Error: ", error);
