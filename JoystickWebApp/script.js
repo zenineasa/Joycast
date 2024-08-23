@@ -5,6 +5,11 @@ document.body.onclick = () => {
     document.body.requestFullscreen();
 };
 
+// Extract the security key from the URL
+const urlSplits = window.location.href.split('/');
+const securityKey = urlSplits.pop();
+const baseURL = urlSplits.join('/');
+
 // Store touch event ID and corresponding button ID
 const touchEventIDVsButtonID = {};
 
@@ -35,7 +40,7 @@ function sendKeyEvent(buttonID, startOrEnd) {
         buttonID: buttonID,
         startOrEnd: startOrEnd
     };
-    fetch('/keyEvent', {
+    fetch(`${baseURL}/keyEvent/${securityKey}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -44,7 +49,10 @@ function sendKeyEvent(buttonID, startOrEnd) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Success:', data);
+        console.log('Reponse:', data);
+        if (data === false) {
+            window.alert('Invalid security code');
+        }
     })
     .catch((error) => {
         console.error('Error:', error);
