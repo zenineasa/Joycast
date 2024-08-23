@@ -1,5 +1,10 @@
 /* Copyright (c) 2024 Zenin Easa Panthakkalakath */
 
+// Ensuring full-screen mode
+document.body.onclick = () => {
+    document.body.requestFullscreen();
+};
+
 // Store touch event ID and corresponding button ID
 const touchEventIDVsButtonID = {};
 

@@ -1,12 +1,8 @@
 /* Copyright (c) 2024 Zenin Easa Panthakkalakath */
 
-html,
-body {
+html, body {
     overflow: hidden;
-    height: 100%;
-}
-
-body {
+    background-color: #fff;
     touch-action: manipulation;
     -ms-touch-action: manipulation;
     -webkit-user-select: none;
@@ -21,6 +17,7 @@ body {
     align-items: center;
 }
 
+/* For direction buttons */
 
 .direction {
     background-color: #000;
@@ -32,6 +29,7 @@ body {
     grid-template-columns: auto auto auto;
     margin-right: 5em;
 }
+
 .direction .buttonContainer {
     color: #fff;
     display: table;
@@ -39,13 +37,17 @@ body {
     width: 100%;
     text-align: center;
 }
+
 .direction .button {
     display: table-cell;
     vertical-align: middle;
 }
-.direction .active{
+
+.direction .active {
     color: #00faff;
 }
+
+/* For actions buttons */
 
 .action {
     align-items: center;
@@ -53,6 +55,7 @@ body {
     grid-template-columns: auto auto auto;
     margin-left: 5em;
 }
+
 .action .button {
     background-color: #000;
     border-radius: 50%;
@@ -60,6 +63,7 @@ body {
     padding: 1.5em;
     margin: 0.5em;
 }
-.action .active{
+
+.action .active {
     color: #00faff;
 }

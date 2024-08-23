@@ -1,0 +1,58 @@
+/* Copyright (c) 2024 Zenin Easa Panthakkalakath */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    background: rgba(0, 180, 255, 0.5);
+
+    color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+/* Custom titlebar at the top */
+
+#titleBar {
+    -webkit-app-region: drag;
+    width: 100%;
+    height: 30px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#titleBar button {
+    -webkit-app-region: no-drag;
+    background: none;
+    border: none;
+    color: white;
+    padding: 0 15px;
+    cursor: pointer;
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
+}
+#titleBar button:hover {
+    background-color: #555;
+}
+
+/* Content in the UI */
+
+#content {
+    width: 100%;
+    height: calc(100% - 30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#content .grid {
+    align-items: center;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+#content .grid > * {
+    padding: 2em;
+}

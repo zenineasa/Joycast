@@ -1,23 +1,26 @@
 {
-  "name": "joystick",
-  "version": "1.0.0",
-  "description": "Turn your phone into joystick",
-  "main": "index.mjs",
-  "scripts": {
-    "start": "node index.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "joystick",
-    "phone",
-    "gaming"
-  ],
-  "author": "zenineasa",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.19.2",
-    "open": "^10.1.0",
-    "qrcode": "^1.5.4",
-    "robotjs": "^0.6.0"
-  }
+    "name": "joystick",
+    "version": "1.0.0",
+    "description": "Turn your phones into joysticks; play single and multiplayer games!",
+    "type": "module",
+    "main": "index.mjs",
+    "scripts": {
+        "start": "electron ."
+    },
+    "keywords": [
+        "joystick",
+        "phone",
+        "gaming"
+    ],
+    "author": "zenineasa",
+    "license": "ISC",
+    "dependencies": {
+        "@meadowsjared/robotjs": "^0.6.26",
+        "electron": "^32.0.1",
+        "express": "^4.19.2",
+        "qrcode": "^1.5.4"
+    },
+    "devDependencies": {
+        "electron-rebuild": "^3.2.9"
+    }
 }
