@@ -59,7 +59,7 @@ class ExpressServer {
                     ),
                     upOrDown: data.startOrEnd === 'start' ? 'down' : 'up'
                 };
-                ipcRenderer.invoke('robotKeyPressAction', action);
+                ipcRenderer.invoke('robotKeyToggleAction', action);
             }
             res.send(true);
         });

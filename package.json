@@ -8,19 +8,18 @@
         "start": "electron ."
     },
     "keywords": [
+        "virtual",
         "joystick",
         "phone",
-        "gaming"
+        "gaming",
+        "multiplayer"
     ],
     "author": "zenineasa",
-    "license": "ISC",
+    "license": "AGPLV3",
     "dependencies": {
         "@meadowsjared/robotjs": "^0.6.26",
         "electron": "^32.0.1",
         "express": "^4.19.2",
         "qrcode": "^1.5.4"
-    },
-    "devDependencies": {
-        "electron-rebuild": "^3.2.9"
     }
 }

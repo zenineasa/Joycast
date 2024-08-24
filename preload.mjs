@@ -14,10 +14,11 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('maximize').addEventListener('click', () => {
         if (isMaximized) {
             window.resizeTo(screen.availWidth * 0.5, screen.availHeight * 0.5);
+            window.moveTo(screen.availWidth * 0.25, screen.availHeight * 0.25);
         } else {
             window.resizeTo(screen.availWidth, screen.availHeight);
+            window.moveTo(0, 0);
         }
-        window.moveTo(0, 0);
         isMaximized = !isMaximized;
     });
 

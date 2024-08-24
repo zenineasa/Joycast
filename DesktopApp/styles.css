@@ -14,6 +14,7 @@ html, body {
 /* Custom titlebar at the top */
 
 #titleBar {
+    position: fixed;
     -webkit-app-region: drag;
     width: 100%;
     height: 2em;
@@ -46,7 +47,7 @@ html, body {
 
 #content {
     width: 100%;
-    height: calc(100% - 2em);
+    height: 100%;
     display: flex;
 }
 #content .grid {
@@ -57,9 +58,48 @@ html, body {
     text-align: center;
 }
 #content .grid > * {
-    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: table;
 }
-#content .grid img {
+#content .grid > *:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+#content .grid > * > * {
+    display: table-cell;
+    vertical-align: middle;
+}
+/* #content .grid img {
     width: 12em;
     height: 12em;
+} */
+#content .grid .config {
+    padding: 4em;
+}
+#content .grid .config .keyVal {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 1em;
+    padding-right: 1em;
+    text-align: center;
+}
+#content .grid .config .keyVal:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+#waitForKeyInput {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: none; /* table; */
+    color: #000;
+    font-size: 4em;
+}
+#waitForKeyInput > * {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
