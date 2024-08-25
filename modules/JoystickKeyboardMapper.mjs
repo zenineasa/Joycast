@@ -37,16 +37,35 @@ class JoystickKeyboardMapper {
         };
 
         if (window.localStorage.getItem('keyOrder') === null) {
-            // await this.validateKeysAndMapEventCodes(); // TODO: ...
-            this.keyOrder = this.potentiallyAvailableKeys();
+            window.alert(
+                'Initializing: Scanning available keyboard keys.' +
+                'After pressing "OK", do not use your keyboard until further' +
+                'notice. This might take a few seconds.'
+            );
+            await this.validateKeysAndMapEventCodes();
             window.localStorage.setItem(
                 'keyOrder', JSON.stringify(this.keyOrder)
             );
+            window.localStorage.setItem(
+                'keyEventVsName', JSON.stringify(this.keyEventVsName)
+            )
+            window.alert(
+                'Initialization complete! You are free to use your keyboard.'
+            );
         } else {
-            this.keyOrder = JSON.parse(window.localStorage.getItem('keyOrder'));
+            this.keyOrder = JSON.parse(
+                window.localStorage.getItem('keyOrder')
+            );
+            this.keyEventVsName = JSON.parse(
+                window.localStorage.getItem('keyEventVsName')
+            );
         }
 
-        this.displayKeyOrder();
+        if (document.readyState === "loading") {
+            window.addEventListener('DOMContentLoaded', this.displayKeyOrder.bind(this));
+        } else {
+            this.displayKeyOrder();
+        }
     }
 
     /**
@@ -87,12 +106,13 @@ class JoystickKeyboardMapper {
         let eventKey, eventCode;
         const waitForKeyPress = () => {
             return new Promise((resolve) => {
-                document.addEventListener('keydown', onKeyHandler);
-                function onKeyHandler(e) {
+                const onKeyHandler = (e) => {
                     eventKey = e.key;
                     eventCode = e.code;
+                    document.removeEventListener('keydown', onKeyHandler);
                     resolve();
                 }
+                document.addEventListener('keydown', onKeyHandler);
             });
         };
         const triggerKeyPress = async (key) => {
@@ -104,24 +124,26 @@ class JoystickKeyboardMapper {
         this.keyEventVsName = {};
         for(let i = 0; i < keysToEvaluate.length; ++i) {
             try {
+                // Trigger the key twice; defensive measure
+                await triggerKeyPress(keysToEvaluate[i]);
+                await triggerKeyPress(keysToEvaluate[i]);
+                // Now wait for the key press and trigger the key again
                 const promise = waitForKeyPress();
                 const success = await triggerKeyPress(keysToEvaluate[i]);
                 if (!success) {
-                    triggerKeyPress('1');
+                    await triggerKeyPress('-');
                 }
                 await promise;
-
+                // If valuated succesfully, add it to the lists/maps
                 if(success) {
                     this.keyOrder.push(keysToEvaluate[i]);
                     this.keyEventVsName[eventCode] = keysToEvaluate[i];
                 }
             } catch (error) {
                 console.log(`${keysToEvaluate[i]} was not found`);
-                triggerKeyPress('1');
+                await triggerKeyPress('-');
             }
         }
-        console.log(this.keyEventVsName);
-        debugger; // TODO: This is not coming out to be exactly correct.
     }
 
     /**
@@ -133,60 +155,58 @@ class JoystickKeyboardMapper {
         const maxNumPlayers =
             Math.floor(this.keyOrder.length / this.numButtonsPerPlayer);
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const waitForKeyInput = document.getElementById('waitForKeyInput');
-            const grid = document.querySelector('.grid');
+        const waitForKeyInput = document.getElementById('waitForKeyInput');
+        const grid = document.querySelector('.grid');
 
-            let configs = grid.querySelectorAll('.config');
+        let configs = grid.querySelectorAll('.config');
 
-            // If there is scope for more number of players than the number of
-            // configs layed out in the grid, let's display more grids!
-            for(let i = 0; i < maxNumPlayers - configs.length; ++i) {
+        // If there is scope for more number of players than the number of
+        // configs layed out in the grid, let's display more grids!
+        for(let i = 0; i < maxNumPlayers - configs.length; ++i) {
+            const div = document.createElement('div');
+            const config = document.createElement('div');
+            config.className = 'config';
+            div.appendChild(config);
+            grid.appendChild(div);
+        }
+        configs = grid.querySelectorAll('.config');
+
+        // Now, display the different joystick keys versus their keyboard
+        // counterpart
+        let keyNumber = 0;
+        for(let playerID = 0; playerID < maxNumPlayers; ++playerID) {
+            for(const joystickKey in this.buttonIDVsOrder) {
+                const keyboardValue = this.keyOrder[keyNumber++];
+
                 const div = document.createElement('div');
-                const config = document.createElement('div');
-                config.className = 'config';
-                div.appendChild(config);
-                grid.appendChild(div);
+                const key = document.createElement('div');
+                const val = document.createElement('div');
+
+                div.className = 'keyVal';
+                key.className = 'key';
+                val.className = 'val';
+
+                key.innerHTML = joystickKey;
+                val.innerHTML = keyboardValue;
+
+                div.appendChild(key);
+                div.appendChild(val);
+                configs[playerID].appendChild(div);
+
+                div.onclick = () => {
+                    waitForKeyInput.style.display = 'table';
+                    document.addEventListener('keydown', onKeyHandler);
+                    function onKeyHandler(e) {
+                        waitForKeyInput.style.display = 'none';
+
+                        console.log(joystickKey);
+                        console.log(keyboardValue);
+                        console.log(e);
+                        debugger; // TODO: set the key to the joystick
+                    }
+                };
             }
-            configs = grid.querySelectorAll('.config');
-
-            // Now, display the different joystick keys versus their keyboard
-            // counterpart
-            let keyNumber = 0;
-            for(let playerID = 0; playerID < maxNumPlayers; ++playerID) {
-                for(const joystickKey in this.buttonIDVsOrder) {
-                    const keyboardValue = this.keyOrder[keyNumber++];
-
-                    const div = document.createElement('div');
-                    const key = document.createElement('div');
-                    const val = document.createElement('div');
-
-                    div.className = 'keyVal';
-                    key.className = 'key';
-                    val.className = 'val';
-
-                    key.innerHTML = joystickKey;
-                    val.innerHTML = keyboardValue;
-
-                    div.appendChild(key);
-                    div.appendChild(val);
-                    configs[playerID].appendChild(div);
-
-                    div.onclick = () => {
-                        waitForKeyInput.style.display = 'table';
-                        document.addEventListener('keydown', onKeyHandler);
-                        function onKeyHandler(e) {
-                            waitForKeyInput.style.display = 'none';
-
-                            console.log(joystickKey);
-                            console.log(keyboardValue);
-                            console.log(e);
-                            debugger; // TODO: set the key to the joystick
-                        }
-                    };
-                }
-            }
-        });
+        }
     }
 
     /**
