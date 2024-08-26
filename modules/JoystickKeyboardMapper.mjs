@@ -111,7 +111,7 @@ class JoystickKeyboardMapper {
                     eventCode = e.code;
                     document.removeEventListener('keydown', onKeyHandler);
                     resolve();
-                }
+                };
                 document.addEventListener('keydown', onKeyHandler);
             });
         };
@@ -193,17 +193,26 @@ class JoystickKeyboardMapper {
                 div.appendChild(val);
                 configs[playerID].appendChild(div);
 
-                div.onclick = () => {
+                div.onclick = (clickEvent) => {
                     waitForKeyInput.style.display = 'table';
-                    document.addEventListener('keydown', onKeyHandler);
-                    function onKeyHandler(e) {
+                    const onKeyHandler = (e) => {
                         waitForKeyInput.style.display = 'none';
+                        // Exchange the values
+                        const index1 = this.keyOrder.findIndex(
+                            (elem) => elem == this.keyEventVsName[e.code]
+                        );
+                        const index2 =this.keyOrder.findIndex(
+                            (elem) => elem == keyboardValue
+                        );
+                        [this.keyOrder[index1], this.keyOrder[index2]] =
+                            [this.keyOrder[index2], this.keyOrder[index1]];
 
-                        console.log(joystickKey);
-                        console.log(keyboardValue);
-                        console.log(e);
-                        debugger; // TODO: set the key to the joystick
-                    }
+                        window.localStorage.setItem(
+                            'keyOrder', JSON.stringify(this.keyOrder)
+                        );
+                        window.location.reload();
+                    };
+                    document.addEventListener('keydown', onKeyHandler);
                 };
             }
         }
