@@ -73,14 +73,22 @@ html, body {
     width: 12em;
     height: 12em;
 } */
+#content .grid .playerID {
+    writing-mode: vertical-lr;
+    text-orientation: sideways;
+    padding-right: 2em;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 #content .grid .config {
     padding: 4em;
+    padding-right: 0em;
 }
 #content .grid .config .keyVal {
     display: flex;
     justify-content: space-between;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-left: 2em;
     text-align: center;
 }
 #content .grid .config .keyVal:hover {
