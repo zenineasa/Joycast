@@ -5,10 +5,28 @@ html, body {
     margin: 0;
     padding: 0;
     user-select: none;
-    background: rgba(0, 180, 255, 0.5);
+    background-color: rgba(0, 180, 255, 0.5);
     color: #fff;
     width: 100%;
     height: 100%;
+}
+
+body > * {
+    z-index: 999;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(images/gamepad.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain, cover;
+    opacity: 0.05;
+    z-index: 1;
 }
 
 /* Custom titlebar at the top */
@@ -42,10 +60,15 @@ html, body {
 #titleBar button:hover {
     background-color: #555;
 }
-
+#titleBar button img {
+    height: 1em;
+    filter: invert(1);
+    vertical-align: middle;
+}
 /* Content in the UI */
 
 #content {
+    position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
@@ -62,6 +85,9 @@ html, body {
     height: 100%;
     display: table;
 }
+#content .grid > *:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
 #content .grid > *:hover {
     background-color: rgba(0, 0, 0, 0.25);
 }
@@ -69,12 +95,12 @@ html, body {
     display: table-cell;
     vertical-align: middle;
 }
-/* #content .grid img {
+#content .grid img {
     width: 12em;
     height: 12em;
-} */
+}
 #content .grid .playerID {
-    writing-mode: vertical-lr;
+    writing-mode: vertical-rl;
     text-orientation: sideways;
     padding-right: 2em;
     font-size: 1.2em;

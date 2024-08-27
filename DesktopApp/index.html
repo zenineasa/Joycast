@@ -8,15 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="titleBar">
-        <div class="title">
-            Joystick Configuration
-        </div>
-        <div class="buttons">
-            <button id="maximize">&#9723;</button>
-            <button id="close">&#x2715;</button>
-        </div>
-    </div>
+    <div class="background"></div>
     <div id="content">
         <div class="grid">
             <div>
@@ -54,6 +46,19 @@
                 <div class="config"></div>
                 <div class="playerID"></div>
             </div>
+        </div>
+    </div>
+    <div id="titleBar">
+        <div class="title">
+            Joystick Configuration
+        </div>
+        <div class="buttons">
+            <button id="refresh" title="Refresh (Kitckout all players and Regenerate QR code)"><img src="images/refresh.svg"></button>
+            <button id="revert" title="Revert changes (Restore default settings)"><img src="images/revert.svg"></button>
+        </div>
+        <div class="buttons">
+            <button id="maximize">&#9723;</button>
+            <button id="close">&#x2715;</button>
         </div>
     </div>
     <div id="waitForKeyInput">

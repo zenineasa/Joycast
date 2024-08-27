@@ -27,6 +27,21 @@ window.addEventListener('DOMContentLoaded', () => {
         window.close();
     });
 
+    // Callback for refresh button
+    document.getElementById('refresh').addEventListener('click', () => {
+        window.location.reload();
+    });
+
+    // Callback for revert button
+    document.getElementById('revert').addEventListener('click', () => {
+        if(window.confirm(
+            'Are you sure? All your changes will be lost if you proceed.'
+        )) {
+            window.localStorage.clear();
+            window.location.reload();
+        }
+    });
+
     // Render the QR code in the UI
     qrcode.toDataURL(ExpressServer.getJoystickURL(), (err, qrCodeInBase64URLFormat) => {
         document.getElementById('qrCode').innerHTML =
