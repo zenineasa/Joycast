@@ -55,21 +55,21 @@
                 {
                     "name": "@electron-forge/maker-squirrel",
                     "config": {
-                        "iconUrl": "",
-                        "setupIcon": ""
+                        "iconUrl": "https://raw.githubusercontent.com/zenineasa/joystick/master/DesktopApp/images/joystick.png",
+                        "setupIcon": "DesktopApp/images/joystick.ico"
                     }
                 },
                 {
                     "name": "@electron-forge/maker-dmg",
                     "config": {
-                        "icon": ""
+                        "icon": "DesktopApp/images/joystick.icns"
                     }
                 },
                 {
                     "name": "@electron-forge/maker-deb",
                     "config": {
                         "options": {
-                            "icon": ""
+                            "icon": "DesktopApp/images/joystick.png"
                         }
                     }
                 },
@@ -77,7 +77,7 @@
                     "name": "@electron-forge/maker-rpm",
                     "config": {
                         "options": {
-                            "icon": ""
+                            "icon": "DesktopApp/images/joystick.png"
                         }
                     }
                 }
