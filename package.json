@@ -2,24 +2,97 @@
     "name": "joystick",
     "version": "1.0.0",
     "description": "Turn your phones into joysticks; play single and multiplayer games!",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zenineasa/joystick.git"
+    },
     "type": "module",
     "main": "index.mjs",
     "scripts": {
-        "start": "electron ."
+        "start": "electron .",
+        "package": "electron-forge package",
+        "make": "electron-forge make"
     },
     "keywords": [
         "virtual",
         "joystick",
         "phone",
         "gaming",
-        "multiplayer"
+        "multiplayer",
+        "electron"
     ],
     "author": "zenineasa",
     "license": "AGPLV3",
     "dependencies": {
         "@meadowsjared/robotjs": "^0.6.26",
-        "electron": "^32.0.1",
         "express": "^4.19.2",
-        "qrcode": "^1.5.4"
+        "qrcode": "^1.5.4",
+        "update-electron-app": "^3.0.0"
+    },
+    "devDependencies": {
+        "@electron-forge/cli": "^7.4.0",
+        "@electron-forge/maker-deb": "^7.4.0",
+        "@electron-forge/maker-dmg": "^7.4.0",
+        "@electron-forge/maker-rpm": "^7.4.0",
+        "@electron-forge/maker-squirrel": "^7.4.0",
+        "@electron-forge/maker-zip": "^7.4.0",
+        "@electron-forge/publisher-github": "^7.4.0",
+        "electron": "^32.0.1"
+    },
+    "config": {
+        "forge": {
+            "makers": [
+                {
+                    "name": "@electron-forge/maker-zip",
+                    "platforms": [
+                        "darwin",
+                        "linux",
+                        "windows"
+                    ],
+                    "config": {}
+                },
+                {
+                    "name": "@electron-forge/maker-squirrel",
+                    "config": {
+                        "iconUrl": "",
+                        "setupIcon": ""
+                    }
+                },
+                {
+                    "name": "@electron-forge/maker-dmg",
+                    "config": {
+                        "icon": ""
+                    }
+                },
+                {
+                    "name": "@electron-forge/maker-deb",
+                    "config": {
+                        "options": {
+                            "icon": ""
+                        }
+                    }
+                },
+                {
+                    "name": "@electron-forge/maker-rpm",
+                    "config": {
+                        "options": {
+                            "icon": ""
+                        }
+                    }
+                }
+            ],
+            "publishers": [
+                {
+                    "name": "@electron-forge/publisher-github",
+                    "config": {
+                        "repository": {
+                            "owner": "zenineasa",
+                            "name": "joystick"
+                        },
+                        "prerelease": true
+                    }
+                }
+            ]
+        }
     }
 }

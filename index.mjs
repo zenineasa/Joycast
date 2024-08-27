@@ -5,6 +5,9 @@ import robot from '@meadowsjared/robotjs';
 import path from 'path';
 import { fileURLToPath } from 'node:url';
 
+import { updateElectronApp } from 'update-electron-app';
+updateElectronApp();
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function createWindow() {
