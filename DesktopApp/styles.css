@@ -26,7 +26,6 @@ body > * {
     background-repeat: no-repeat;
     background-size: contain, cover;
     opacity: 0.05;
-    z-index: 1;
 }
 
 /* Custom titlebar at the top */
