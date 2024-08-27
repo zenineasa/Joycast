@@ -2,7 +2,14 @@
 
 Read more about this project at https://www.buddygo.net/2024/08/turning-your-phone-into-virtual-joystick.html
 
-## How to use
+## How to use: the release version
+
+1. Download and install the latest release from the following URL: https://github.com/zenineasa/joystick/releases/latest
+2. Open the installed software.
+3. A QR-code would appear on your screen. Scan it with your phone and enjoy the virtual joystick.
+4. (Optional) You can change the configuration of which keyboard is mapped to which joystick key.
+
+## How to use: the development version
 
 Assuming that you already have NodeJS installed, open a terminal and perform the following.
 
@@ -19,7 +26,8 @@ npm install
 ```
 npm start
 ```
-4. A URL would appear on the terminal. Open that with your phone and enjoy the virtual joystick.
+4. A QR-code would appear on your screen. Scan it with your phone and enjoy the virtual joystick.
+5. (Optional) You can change the configuration of which keyboard is mapped to which joystick key.
 
 #
 
