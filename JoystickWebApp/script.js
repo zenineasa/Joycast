@@ -2,7 +2,16 @@
 
 // Ensuring full-screen mode
 document.body.onclick = () => {
-    document.body.requestFullscreen();
+    let elem = document.documentElement;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+    }
 };
 
 // Extract the security key from the URL
