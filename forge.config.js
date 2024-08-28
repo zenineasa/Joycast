@@ -18,21 +18,28 @@ export default {
         {
             "name": "@electron-forge/maker-squirrel",
             "config": {
+                // eslint-disable-next-line max-len
                 "iconUrl": "https://raw.githubusercontent.com/zenineasa/joystick/master/DesktopApp/images/joystick.png",
-                "setupIcon": path.join(process.cwd(), "DesktopApp/images/joystick.ico")
+                "setupIcon": path.join(
+                    process.cwd(), "DesktopApp/images/joystick.ico"
+                )
             }
         },
         {
             "name": "@electron-forge/maker-dmg",
             "config": {
-                "icon": path.join(process.cwd(), "DesktopApp/images/joystick.icns")
+                "icon": path.join(
+                    process.cwd(), "DesktopApp/images/joystick.icns"
+                )
             }
         },
         {
             "name": "@electron-forge/maker-deb",
             "config": {
                 "options": {
-                    "icon": path.join(process.cwd(), "DesktopApp/images/joystick.png")
+                    "icon": path.join(
+                        process.cwd(), "DesktopApp/images/joystick.png"
+                    )
                 }
             }
         },
@@ -40,7 +47,9 @@ export default {
             "name": "@electron-forge/maker-rpm",
             "config": {
                 "options": {
-                    "icon": path.join(process.cwd(), "DesktopApp/images/joystick.png")
+                    "icon": path.join(
+                        process.cwd(), "DesktopApp/images/joystick.png"
+                    )
                 }
             }
         }

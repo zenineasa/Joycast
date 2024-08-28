@@ -51,7 +51,7 @@ html, body {
 /* For direction buttons */
 
 .direction {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(255, 255, 255, 0.8);
     width: 14em;
     height: 14em;
     border-radius: 50%;
@@ -62,7 +62,7 @@ html, body {
 }
 
 .direction .buttonContainer {
-    color: #fff;
+    color: #000;
     display: table;
     height: 100%;
     width: 100%;
@@ -88,9 +88,9 @@ html, body {
 }
 
 .action .button {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
-    color: #fff;
+    color: #000;
     padding: 1.5em;
     margin: 0.5em;
 }

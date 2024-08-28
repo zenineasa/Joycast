@@ -62,7 +62,9 @@ class JoystickKeyboardMapper {
         }
 
         if (document.readyState === "loading") {
-            window.addEventListener('DOMContentLoaded', this.displayKeyOrder.bind(this));
+            window.addEventListener(
+                'DOMContentLoaded', this.displayKeyOrder.bind(this)
+            );
         } else {
             this.displayKeyOrder();
         }
@@ -103,11 +105,10 @@ class JoystickKeyboardMapper {
      * RobotJS key codes
      */
     async validateKeysAndMapEventCodes() {
-        let eventKey, eventCode;
+        let eventCode;
         const waitForKeyPress = () => {
             return new Promise((resolve) => {
                 const onKeyHandler = (e) => {
-                    eventKey = e.key;
                     eventCode = e.code;
                     document.removeEventListener('keydown', onKeyHandler);
                     resolve();
@@ -247,7 +248,9 @@ class JoystickKeyboardMapper {
     getKeyboardButton(playerIP, buttonID) {
         const playerID = this.getPlayerID(playerIP);
         const buttonNumber = this.buttonIDVsOrder[buttonID];
-        return this.keyOrder[playerID * this.numButtonsPerPlayer + buttonNumber];
+        return this.keyOrder[
+            playerID * this.numButtonsPerPlayer + buttonNumber
+        ];
     }
 };
 

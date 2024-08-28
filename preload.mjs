@@ -43,8 +43,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     // Render the QR code in the UI
-    qrcode.toDataURL(ExpressServer.getJoystickURL(), (err, qrCodeInBase64URLFormat) => {
+    qrcode.toDataURL(ExpressServer.getJoystickURL(), (err, base64ImageURL) => {
         document.getElementById('qrCode').innerHTML =
-            `<img src="${qrCodeInBase64URLFormat}">`;
+            `<img src="${base64ImageURL}">`;
     });
 });

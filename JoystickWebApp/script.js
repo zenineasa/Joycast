@@ -56,16 +56,16 @@ function sendKeyEvent(buttonID, startOrEnd) {
         },
         body: JSON.stringify(data),
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Reponse:', data);
-        if (data === false) {
-            window.alert('Invalid security code');
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log('Reponse:', data);
+            if (data === false) {
+                window.alert('Invalid security code');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
 // To prevent accidentally invoking refresh
