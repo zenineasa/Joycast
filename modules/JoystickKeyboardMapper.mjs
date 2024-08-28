@@ -1,6 +1,8 @@
 /* Copyright (c) 2024 Zenin Easa Panthakkalakath */
 
 import { ipcRenderer } from 'electron';
+import fs from 'node:fs';
+import { platform } from 'node:os';
 
 /**
  * This class helps in mapping joystick buttons with keyboard keys
@@ -36,37 +38,30 @@ class JoystickKeyboardMapper {
             'Y': this.numButtonsPerPlayer++,
         };
 
-        if (window.localStorage.getItem('keyOrder') === null) {
-            window.alert(
-                'Initializing: Scanning available keyboard keys.' +
-                'After pressing "OK", do not use your keyboard until further' +
-                'notice. This might take a few seconds.'
-            );
-            await this.validateKeysAndMapEventCodes();
-            window.localStorage.setItem(
-                'keyOrder', JSON.stringify(this.keyOrder)
-            );
-            window.localStorage.setItem(
-                'keyEventVsName', JSON.stringify(this.keyEventVsName)
-            )
-            window.alert(
-                'Initialization complete! You are free to use your keyboard.'
-            );
+        if (window.localStorage.getItem('keyCodeVsName') === null) {
+            // Load from the JSON files
+            const jsonFilePath =
+                `modules/defaults/${platform}.keyCodeVsName.json`;
+            if (fs.existsSync(jsonFilePath)) {
+                this.keyCodeVsName = JSON.parse(
+                    fs.readFileSync(jsonFilePath, 'utf8')
+                );
+            } else {
+                await this.generateDefaultMapping(jsonFilePath);
+            }
         } else {
-            this.keyOrder = JSON.parse(
-                window.localStorage.getItem('keyOrder')
-            );
-            this.keyEventVsName = JSON.parse(
-                window.localStorage.getItem('keyEventVsName')
+            // Load from local storage; this captures user edits
+            this.keyCodeVsName = JSON.parse(
+                window.localStorage.getItem('keyCodeVsName')
             );
         }
 
         if (document.readyState === "loading") {
             window.addEventListener(
-                'DOMContentLoaded', this.displayKeyOrder.bind(this)
+                'DOMContentLoaded', this.displayMapping.bind(this)
             );
         } else {
-            this.displayKeyOrder();
+            this.displayMapping();
         }
     }
 
@@ -102,9 +97,16 @@ class JoystickKeyboardMapper {
 
     /**
      * Validte keys and create a mapping between JavaScript event key codes and
-     * RobotJS key codes
+     * RobotJS key codes.
+     * @param {string} jsonFilePath where to save the generated mapping
      */
-    async validateKeysAndMapEventCodes() {
+    async generateDefaultMapping(jsonFilePath) {
+        window.alert(
+            'Initializing: Scanning available keyboard keys.' +
+            'After pressing "OK", do not use your keyboard until further' +
+            'notice. This might take a few seconds.'
+        );
+
         let eventCode;
         const waitForKeyPress = () => {
             return new Promise((resolve) => {
@@ -121,8 +123,7 @@ class JoystickKeyboardMapper {
         };
         const keysToEvaluate = this.potentiallyAvailableKeys();
 
-        this.keyOrder = [];
-        this.keyEventVsName = {};
+        this.keyCodeVsName = {};
         for(let i = 0; i < keysToEvaluate.length; ++i) {
             try {
                 // Trigger the key twice; defensive measure
@@ -137,30 +138,40 @@ class JoystickKeyboardMapper {
                 await promise;
                 // If valuated succesfully, add it to the lists/maps
                 if(success) {
-                    this.keyOrder.push(keysToEvaluate[i]);
-                    this.keyEventVsName[eventCode] = keysToEvaluate[i];
+                    this.keyCodeVsName[eventCode] = keysToEvaluate[i];
                 }
             } catch (error) {
                 console.log(`${keysToEvaluate[i]} was not found`);
                 await triggerKeyPress('-');
             }
         }
+
+        window.localStorage.setItem(
+            'keyCodeVsName', JSON.stringify(this.keyCodeVsName)
+        )
+        window.alert(
+            'Initialization complete! You are free to use your keyboard.'
+        );
+
+        fs.writeFileSync(
+            jsonFilePath,
+            JSON.stringify(this.keyCodeVsName, null, 4),
+            'utf8'
+        );
     }
 
     /**
      * Display the key order on the UI
      */
-    displayKeyOrder() {
-        // this.buttonIDVsOrder contains the buttons on the joystick
-        // we need to map it with this.keyOrder
-        const maxNumPlayers =
-            Math.floor(this.keyOrder.length / this.numButtonsPerPlayer);
+    displayMapping() {
+        const entriesInKeyEventVsName = Object.entries(this.keyCodeVsName);
+        const maxNumPlayers = Math.floor(
+            entriesInKeyEventVsName.length / this.numButtonsPerPlayer
+        );
 
         const waitForKeyInput = document.getElementById('waitForKeyInput');
         const grid = document.querySelector('.grid');
-
         let configs = grid.querySelectorAll('.config');
-
         // If there is scope for more number of players than the number of
         // configs layed out in the grid, let's display more grids!
         for(let i = 0; i < maxNumPlayers - configs.length; ++i) {
@@ -177,10 +188,18 @@ class JoystickKeyboardMapper {
 
         // Now, display the different joystick keys versus their keyboard
         // counterpart
+        this.playerIDVsButtonOrderVsKeyboardValue = {};
         let keyNumber = 0;
         for(let playerID = 0; playerID < maxNumPlayers; ++playerID) {
-            for(const joystickKey in this.buttonIDVsOrder) {
-                const keyboardValue = this.keyOrder[keyNumber++];
+            this.playerIDVsButtonOrderVsKeyboardValue[playerID] = {};
+            for(
+                let [buttonID, buttonOrder] of
+                Object.entries(this.buttonIDVsOrder)
+            ) {
+                const keyboardValue = entriesInKeyEventVsName[keyNumber++][1];
+
+                this.playerIDVsButtonOrderVsKeyboardValue
+                    [playerID][buttonOrder] = keyboardValue;
 
                 const div = document.createElement('div');
                 const key = document.createElement('div');
@@ -190,30 +209,34 @@ class JoystickKeyboardMapper {
                 key.className = 'key';
                 val.className = 'val';
 
-                key.innerHTML = joystickKey;
+                key.innerHTML = buttonID;
                 val.innerHTML = keyboardValue;
 
                 div.appendChild(key);
                 div.appendChild(val);
                 configs[playerID].appendChild(div);
 
-                div.onclick = (clickEvent) => {
+                div.onclick = (_clickEvent) => {
                     waitForKeyInput.style.display = 'table';
                     const onKeyHandler = (e) => {
                         waitForKeyInput.style.display = 'none';
-                        // Exchange the values
-                        const index1 = this.keyOrder.findIndex(
-                            (elem) => elem == this.keyEventVsName[e.code]
-                        );
-                        const index2 =this.keyOrder.findIndex(
-                            (elem) => elem == keyboardValue
-                        );
-                        [this.keyOrder[index1], this.keyOrder[index2]] =
-                            [this.keyOrder[index2], this.keyOrder[index1]];
+                        const keyCodeOther = entriesInKeyEventVsName.find(
+                            (elem) => elem[1] == keyboardValue
+                        )[0];
 
+                        // Exchange the values
+                        [
+                            this.keyCodeVsName[e.code],
+                            this.keyCodeVsName[keyCodeOther]
+                        ] = [
+                            this.keyCodeVsName[keyCodeOther],
+                            this.keyCodeVsName[e.code]
+                        ]
+
+                        // Update local storage and then reload
                         window.localStorage.setItem(
-                            'keyOrder', JSON.stringify(this.keyOrder)
-                        );
+                            'keyCodeVsName', JSON.stringify(this.keyCodeVsName)
+                        )
                         window.location.reload();
                     };
                     document.addEventListener('keydown', onKeyHandler);
@@ -247,10 +270,8 @@ class JoystickKeyboardMapper {
      */
     getKeyboardButton(playerIP, buttonID) {
         const playerID = this.getPlayerID(playerIP);
-        const buttonNumber = this.buttonIDVsOrder[buttonID];
-        return this.keyOrder[
-            playerID * this.numButtonsPerPlayer + buttonNumber
-        ];
+        const buttonOrder = this.buttonIDVsOrder[buttonID];
+        return this.playerIDVsButtonOrderVsKeyboardValue[playerID][buttonOrder];
     }
 };
 
