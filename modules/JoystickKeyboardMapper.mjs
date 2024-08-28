@@ -75,7 +75,7 @@ class JoystickKeyboardMapper {
             keyList.push(String.fromCharCode(i));
         }
         // Numbers; both numpad and otherwise
-        for (let i = 0; i < 9; ++i) {
+        for (let i = 0; i <= 9; ++i) {
             keyList.push(i.toString());
             keyList.push(`numpad_${i}`);
         }
@@ -86,10 +86,11 @@ class JoystickKeyboardMapper {
         }
         // Other keys
         keyList.push(
+            '[', ']', ';', '\'', ',', '.', '/', '-', '=', '`', '\\',
             'up', 'down', 'right', 'left',
             'numpad_+', 'numpad_-', 'numpad_*', 'numpad_/', 'numpad_.',
             'home', 'end', 'pageup', 'pagedown',
-            'backspace', 'delete', 'enter', 'tab', 'escape'
+            'backspace', 'delete', 'enter', 'tab', 'escape',
         );
 
         return keyList;
@@ -125,6 +126,7 @@ class JoystickKeyboardMapper {
 
         this.keyCodeVsName = {};
         for(let i = 0; i < keysToEvaluate.length; ++i) {
+            console.log(`Checking: ${keysToEvaluate[i]}`);
             try {
                 // Trigger the key twice; defensive measure
                 await triggerKeyPress(keysToEvaluate[i]);
