@@ -33,6 +33,8 @@ class ExpressServer {
     start() {
         this.app = express();
 
+        this.app.set('views', join(__dirname, 'JoystickWebApp'));
+        this.app.set('view engine', 'ejs');
         this.app.use(express.json());
         this.app.use(express.static(__dirname + '/JoystickWebApp'));
 
@@ -41,7 +43,14 @@ class ExpressServer {
                 res.send('Virtual Joystick; please scan the QR code');
                 return;
             }
-            res.sendFile(__dirname + '/JoystickWebApp/index.html');
+            const playerIP =
+                req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            res.render(
+                'index.ejs',
+                {
+                    playerID : JoystickKeyboardMapper.getPlayerID(playerIP) + 1
+                }
+            );
         });
 
         this.app.post('/keyEvent/:securityKey', (req, res) => {

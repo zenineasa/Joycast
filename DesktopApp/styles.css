@@ -21,11 +21,27 @@ body > * {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(images/gamepad.svg);
+    background-image: url(images/joystick.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain, cover;
     opacity: 0.05;
+}
+
+/* For scrollbar */
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+::-webkit-scrollbar-track {
+    border-radius: 0.5em;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 0.5em;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
 }
 
 /* Custom titlebar at the top */
@@ -59,10 +75,10 @@ body > * {
 #titleBar button:hover {
     background-color: #555;
 }
-#titleBar button img {
+#titleBar img {
     height: 1em;
     filter: invert(1);
-    vertical-align: middle;
+    vertical-align: text-top;
 }
 /* Content in the UI */
 
@@ -71,6 +87,7 @@ body > * {
     width: 100%;
     height: 100%;
     display: flex;
+    overflow-y: auto;
 }
 #content .grid {
     display: grid;

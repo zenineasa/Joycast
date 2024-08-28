@@ -178,12 +178,12 @@ class JoystickKeyboardMapper {
         // configs layed out in the grid, let's display more grids!
         for(let i = 0; i < maxNumPlayers - configs.length; ++i) {
             const div = document.createElement('div');
-            const playerID = document.createElement('div');
-            playerID.className = 'playerID';
-            div.appendChild(playerID);
             const config = document.createElement('div');
             config.className = 'config';
             div.appendChild(config);
+            const playerID = document.createElement('div');
+            playerID.className = 'playerID';
+            div.appendChild(playerID);
             grid.appendChild(div);
         }
         configs = grid.querySelectorAll('.config');
