@@ -39,6 +39,7 @@ class ExpressServer {
         this.app.get(`/:securityKey`, (req, res) => {
             if (req.params.securityKey !== this.securityKey) {
                 res.send('Virtual Joystick; please scan the QR code');
+                return;
             }
             res.sendFile(__dirname + '/JoystickWebApp/index.html');
         });
