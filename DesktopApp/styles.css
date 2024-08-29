@@ -131,6 +131,7 @@ body > * {
     display: flex;
     justify-content: space-between;
     padding-left: 2em;
+    padding-right: 2em;
     text-align: center;
 }
 #content .grid .config .keyVal:hover {
@@ -152,4 +153,11 @@ body > * {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
+}
+
+#bottom {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
