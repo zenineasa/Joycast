@@ -3,6 +3,9 @@
 import { ipcRenderer } from 'electron';
 import fs from 'node:fs';
 import { platform } from 'node:os';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const __dirname = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 /**
  * This class helps in mapping joystick buttons with keyboard keys
@@ -26,22 +29,24 @@ class JoystickKeyboardMapper {
 
         this.numButtonsPerPlayer = 0;
         this.buttonIDVsOrder = {
-            'N': this.numButtonsPerPlayer++,
-            'E': this.numButtonsPerPlayer++,
-            'W': this.numButtonsPerPlayer++,
-            'S': this.numButtonsPerPlayer++,
-            'A': this.numButtonsPerPlayer++,
-            'B': this.numButtonsPerPlayer++,
-            'C': this.numButtonsPerPlayer++,
-            'D': this.numButtonsPerPlayer++,
-            'X': this.numButtonsPerPlayer++,
-            'Y': this.numButtonsPerPlayer++,
+            '▲': this.numButtonsPerPlayer++,
+            '▼': this.numButtonsPerPlayer++,
+            '◀': this.numButtonsPerPlayer++,
+            '▶': this.numButtonsPerPlayer++,
+            '⊙': this.numButtonsPerPlayer++,
+            'χ': this.numButtonsPerPlayer++,
+            'π': this.numButtonsPerPlayer++,
+            'ψ': this.numButtonsPerPlayer++,
+            'ω': this.numButtonsPerPlayer++,
+            'θ': this.numButtonsPerPlayer++,
         };
 
         if (window.localStorage.getItem('keyCodeVsName') === null) {
             // Load from the JSON files
-            const jsonFilePath =
-                `modules/defaults/${platform}.keyCodeVsName.json`;
+            const jsonFilePath = join(
+                __dirname,
+                `modules/defaults/${platform()}.keyCodeVsName.json`
+            );
             if (fs.existsSync(jsonFilePath)) {
                 this.keyCodeVsName = JSON.parse(
                     fs.readFileSync(jsonFilePath, 'utf8')

@@ -40,10 +40,10 @@ app.on('activate', () => {
 });
 
 // Information regarding joystick event is communicated here
-ipcMain.handle('robotKeyToggleAction', (event, action) => {
-    robot.keyToggle(action.button,action.upOrDown);
+ipcMain.handle('robotKeyToggleAction', (_event, action) => {
+    robot.keyToggle(action.button, action.upOrDown);
 });
-ipcMain.handle('robotKeyTapAction', (event, button) => {
+ipcMain.handle('robotKeyTapAction', (_event, button) => {
     robot.keyTap(button);
     try {
         robot.keyTap(button);
