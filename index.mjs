@@ -2,13 +2,13 @@
 
 import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import robot from '@meadowsjared/robotjs';
-import path from 'path';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { updateElectronApp } from 'update-electron-app';
 updateElectronApp();
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function createWindow() {
     const mainWindow = new BrowserWindow({
@@ -18,7 +18,7 @@ function createWindow() {
         transparent: true,
         title: 'Joystick',
         webPreferences: {
-            preload: path.join(__dirname, 'preload.mjs'),
+            preload: join(__dirname, 'preload.mjs'),
             nodeIntegration: true,
             contextIsolation: false
         }
