@@ -4,7 +4,7 @@
 
 Joycast is a software that lets you turn your phone into a virtual game controller for your computer. Simply open the software on your computer, scan the QR code with your phone, and start playing games with your friends.
 
-![Joycast](https://raw.githubusercontent.com/zenineasa/joycast/master/coverpic.png)
+![Joycast](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyb7KoHDFFLXplwFcMAqUlDTLzPDH-X4t67aNK8PoSffM6FKaOVfELrSId3KoDQ8ICm_mOGHQexnQB45QuyfD4vMGqXnmtfdZ8_n73ili6qazuCbx86PuFs62_6FU-MrwDmWIeiGOabdFrJDAHt49wYbFP6AEkhhKI25vqov4JdQsBUv-I43iDohHqJ28/s16000/joystickScreenshots.png)
 
 ## Key Features:
 
