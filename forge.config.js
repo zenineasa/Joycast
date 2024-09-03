@@ -19,9 +19,9 @@ export default {
             "name": "@electron-forge/maker-squirrel",
             "config": {
                 // eslint-disable-next-line max-len
-                "iconUrl": "https://raw.githubusercontent.com/zenineasa/joystick/master/DesktopApp/images/joystick.png",
+                "iconUrl": "https://raw.githubusercontent.com/zenineasa/joycast/master/DesktopApp/images/joycast.png",
                 "setupIcon": path.join(
-                    process.cwd(), "DesktopApp/images/joystick.ico"
+                    process.cwd(), "DesktopApp/images/joycast.ico"
                 )
             }
         },
@@ -29,7 +29,7 @@ export default {
             "name": "@electron-forge/maker-dmg",
             "config": {
                 "icon": path.join(
-                    process.cwd(), "DesktopApp/images/joystick.icns"
+                    process.cwd(), "DesktopApp/images/joycast.icns"
                 )
             }
         },
@@ -38,7 +38,7 @@ export default {
             "config": {
                 "options": {
                     "icon": path.join(
-                        process.cwd(), "DesktopApp/images/joystick.png"
+                        process.cwd(), "DesktopApp/images/joycast.png"
                     )
                 }
             }
@@ -48,7 +48,7 @@ export default {
             "config": {
                 "options": {
                     "icon": path.join(
-                        process.cwd(), "DesktopApp/images/joystick.png"
+                        process.cwd(), "DesktopApp/images/joycast.png"
                     )
                 }
             }
@@ -60,7 +60,7 @@ export default {
             "config": {
                 "repository": {
                     "owner": "zenineasa",
-                    "name": "joystick"
+                    "name": "joycast"
                 },
                 "prerelease": true
             }

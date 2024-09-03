@@ -35,15 +35,15 @@ build-windows:
 build-linux:
 	npx electron-forge make --platform=linux --arch=x64
 
-# To have a joystick icon on the macOS APP-file and DMG-file
-MAC_ICON_PATH := DesktopApp/images/joystick.icns
+# To have the icon on the macOS APP-file and DMG-file
+MAC_ICON_PATH := DesktopApp/images/joycast.icns
 MAKE_PATH := out/make
 define BUILD_MAC_DMG
 	$(eval VERSION := $(shell npm pkg get version --workspaces=false | tr -d \"))
 
-	$(eval MAC_APP_PATH := out/joystick-$(1)-$(2)/joystick.app)
-	$(eval MAC_APP_RENAMED_PATH := out/joystick-$(1)-$(2)/joystick-$(VERSION).app)
-	$(eval MAC_DMG_PATH := $(MAKE_PATH)/joystick-$(VERSION)-$(2).dmg)
+	$(eval MAC_APP_PATH := out/joycast-$(1)-$(2)/joycast.app)
+	$(eval MAC_APP_RENAMED_PATH := out/joycast-$(1)-$(2)/joycast-$(VERSION).app)
+	$(eval MAC_DMG_PATH := $(MAKE_PATH)/joycast-$(VERSION)-$(2).dmg)
 
 	$(eval APPDMG_JSON_PATH := appdmg.json)
 	$(eval ICNS_PATH := out/icon_mac.icns)
@@ -57,7 +57,7 @@ define BUILD_MAC_DMG
 	touch $(MAC_APP_RENAMED_PATH)
 
 	echo '{' > $(APPDMG_JSON_PATH)
-	echo '"title": "joystick",' >> $(APPDMG_JSON_PATH)
+	echo '"title": "joycast",' >> $(APPDMG_JSON_PATH)
 	echo '"icon": "$(MAC_ICON_PATH)",' >> $(APPDMG_JSON_PATH)
 	echo '"background-color": "#2b2e2f",' >> $(APPDMG_JSON_PATH)
 	echo '"contents": [' >> $(APPDMG_JSON_PATH)

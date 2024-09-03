@@ -16,7 +16,7 @@ function createWindow() {
         height: screen.getPrimaryDisplay().workAreaSize.height,
         frame: false,
         transparent: true,
-        title: 'Joystick',
+        title: 'Joycast',
         webPreferences: {
             preload: join(__dirname, 'preload.mjs'),
             nodeIntegration: true,

@@ -1,10 +1,10 @@
-# Joystick: Turn Your Phone into a Virtual Game Controller
+# Joycast: Turn Your Phone into a Virtual Game Controller
 
-## What is Joystick?
+## What is Joycast?
 
-Joystick is a software that lets you turn your phone into a virtual game controller for your computer. Simply open the software on your computer, scan the QR code with your phone, and start playing games with your friends.
+Joycast is a software that lets you turn your phone into a virtual game controller for your computer. Simply open the software on your computer, scan the QR code with your phone, and start playing games with your friends.
 
-![Joystick](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyb7KoHDFFLXplwFcMAqUlDTLzPDH-X4t67aNK8PoSffM6FKaOVfELrSId3KoDQ8ICm_mOGHQexnQB45QuyfD4vMGqXnmtfdZ8_n73ili6qazuCbx86PuFs62_6FU-MrwDmWIeiGOabdFrJDAHt49wYbFP6AEkhhKI25vqov4JdQsBUv-I43iDohHqJ28/s16000/joystickScreenshots.png)
+![Joycast](https://raw.githubusercontent.com/zenineasa/joycast/master/coverpic.png)
 
 ## Key Features:
 
@@ -14,7 +14,7 @@ Joystick is a software that lets you turn your phone into a virtual game control
 
 ## How it works
 
-1. Open the Joystick software on your computer.
+1. Open the Joycast software on your computer.
 2. Scan the QR code with your phone.
 3. Your phone will become a virtual joystick, allowing you to control games on your computer.
 4. Invite friends to scan the QR code and join in on the fun.
@@ -26,18 +26,18 @@ Joystick is a software that lets you turn your phone into a virtual game control
 ### Using the Release version
 
 You can get the latest release version from the following URL:
-https://github.com/zenineasa/joystick/releases/latest
+https://github.com/zenineasa/joycast/releases/latest
 
 ### Using the development version
 
 Assuming that you already have NodeJS installed, open a terminal and perform the following:
 1. Clone this repository using the following command. Alternatively, you can download it from GitHub page as well.
     ```
-    git clone https://github.com/zenineasa/joystick.git
+    git clone https://github.com/zenineasa/joycast.git
     ```
 2. Move to the cloned repo directory and install all dependencies using the following command.
     ```
-    cd joystick
+    cd joycast
     npm install
     ```
 3. Launch the software on your computer using the following command.

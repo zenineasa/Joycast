@@ -1,10 +1,10 @@
 {
-    "name": "joystick",
+    "name": "joycast",
     "version": "1.0.1",
     "description": "Turn your phones into joysticks; play single and multiplayer games!",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/zenineasa/joystick.git"
+        "url": "git+https://github.com/zenineasa/joycast.git"
     },
     "type": "module",
     "main": "index.mjs",
@@ -14,7 +14,11 @@
         "make": "electron-forge make",
         "publish": "electron-forge publish"
     },
+    "bin": {
+        "my-startup-command": "./npx.js"
+    },
     "keywords": [
+        "joycast",
         "virtual",
         "joystick",
         "phone",
