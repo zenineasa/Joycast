@@ -1,6 +1,6 @@
 {
     "name": "joycast",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Turn your phones into joysticks; play single and multiplayer games!",
     "repository": {
         "type": "git",
@@ -32,6 +32,7 @@
         "@meadowsjared/robotjs": "^0.6.26",
         "ejs": "^3.1.10",
         "express": "^4.19.2",
+        "electron": "^32.0.1",
         "qrcode": "^1.5.4",
         "update-electron-app": "^3.0.0"
     },
@@ -44,7 +45,6 @@
         "@electron-forge/maker-zip": "^7.4.0",
         "@electron-forge/publisher-github": "^7.4.0",
         "copyright-header": "^0.4.6",
-        "electron": "^32.0.1",
         "eslint": "^9.9.1",
         "eslint-config-google": "^0.14.0"
     }
