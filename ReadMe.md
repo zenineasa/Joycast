@@ -21,12 +21,24 @@ Joycast is a software that lets you turn your phone into a virtual game controll
 
 ## Getting started
 
-*Recommendation*: I suggest using the development version for now, as the released versions have been found to occasionally experience minor issues.
+*Recommendation*: I suggest using the NPM registry or the development version for now, as the released versions have been found to occasionally experience minor issues.
 
 ### Using the Release version
 
 You can get the latest release version from the following URL:
 https://github.com/zenineasa/joycast/releases/latest
+
+### Using NPM registry
+
+Assuming that you already have NodeJS's Package Manager (NPM) installed, open a terminal and perform the following:
+1. Install from the registry:
+    ```
+    npm install -g joycast
+    ```
+2. Launch the software using NPX-command.
+    ```
+    npx joycast
+    ```
 
 ### Using the development version
 
