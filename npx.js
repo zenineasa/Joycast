@@ -11,6 +11,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
  */
 spawn('npm', ['start'], {
     stdio: 'inherit',
+    shell: true,
     cwd: __dirname
 }).on('exit', (code, _signal) => {
     process.exit(code);
