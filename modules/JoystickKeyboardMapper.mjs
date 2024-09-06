@@ -231,14 +231,20 @@ class JoystickKeyboardMapper {
                             (elem) => elem[1] == keyboardValue
                         )[0];
 
-                        // Exchange the values
-                        [
-                            this.keyCodeVsName[e.code],
-                            this.keyCodeVsName[keyCodeOther]
-                        ] = [
-                            this.keyCodeVsName[keyCodeOther],
-                            this.keyCodeVsName[e.code]
-                        ]
+                        // Exchange the order
+                        const keyCodeVsName = {};
+                        entriesInKeyEventVsName.forEach((entry) => {
+                            if(entry[0] === e.code) {
+                                keyCodeVsName[keyCodeOther] =
+                                    this.keyCodeVsName[keyCodeOther];
+                            } else if (entry[0] === keyCodeOther) {
+                                keyCodeVsName[e.code] =
+                                    this.keyCodeVsName[e.code];
+                            } else {
+                                keyCodeVsName[entry[0]] = entry[1];
+                            }
+                        });
+                        this.keyCodeVsName = keyCodeVsName;
 
                         // Update local storage and then reload
                         window.localStorage.setItem(
