@@ -1,6 +1,6 @@
 {
     "name": "joycast",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Turn your phones into joysticks; play single and multiplayer games!",
     "repository": {
         "type": "git",
@@ -47,5 +47,6 @@
         "copyright-header": "^0.4.6",
         "eslint": "^9.9.1",
         "eslint-config-google": "^0.14.0"
-    }
+    },
+    "homepage": "https://www.gameagora.com/"
 }
